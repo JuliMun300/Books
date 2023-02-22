@@ -14,11 +14,3 @@
 .cxx
 
 
-local.properties
-settings.gradle
-build.gradle
-gradle.properties
-gradlew
-gradlew.bat
-/gradle
-.idea
