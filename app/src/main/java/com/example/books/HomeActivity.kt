@@ -1,7 +1,9 @@
 package com.example.books
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Adapter
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
@@ -13,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 private lateinit var ToolbarBooks: Toolbar
 private lateinit var BotonAgregarLibro: FloatingActionButton
 private lateinit var RecyclerViewBooks: RecyclerView
+
 private var listaLibros = mutableListOf<Book>(
     Book("Harry Potter", "1999", "Jk Rowling")
 )
@@ -47,7 +50,6 @@ class HomeActivity : AppCompatActivity() {
         RecyclerViewBooks = findViewById(R.id.recyclerviewbooks)
         RecyclerViewBooks.setHasFixedSize(true)
         RecyclerViewBooks.layoutManager = LinearLayoutManager(this)
-
         val adapter = BooksAdapter(listaLibros)
         RecyclerViewBooks.adapter = adapter
 
@@ -57,8 +59,10 @@ class HomeActivity : AppCompatActivity() {
     private fun SetupButoon() {
         BotonAgregarLibro = findViewById(R.id.botonAgregarLibro)
 
-        BotonAgregarLibro.setOnClickListener{
-            Toast.makeText(this, "Boton Presionado", Toast.LENGTH_SHORT).show()
+        BotonAgregarLibro.setOnClickListener {
+            startActivity(Intent(this, AgregarLibroActivity::class.java))
+
+
         }
 
     }
