@@ -15,11 +15,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 private lateinit var ToolbarBooks: Toolbar
 private lateinit var BotonAgregarLibro: FloatingActionButton
 private lateinit var RecyclerViewBooks: RecyclerView
-
 private var listaLibros = mutableListOf<Book>(
     Book("Harry Potter", "1999", "Jk Rowling")
 )
-
+val adapter = BooksAdapter(listaLibros)
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,33 +36,45 @@ class HomeActivity : AppCompatActivity() {
 
         //Funcion para Modificar el boton de agregar libro
         SetupButoon()
+
+        //Funcion para Notificar que se Agrego un nuevo Libro
+        SetupNewBooks()
+    }
+
+    private fun SetupNewBooks() {
+        val nuevolibro = intent.getParcelableExtra<Book>("NUEVOLIBRO")
+
+        if (nuevolibro != null) {
+            AgregarNuevoLibro(nuevolibro)
+        }
+    }
+
+    private fun AgregarNuevoLibro(nuevolibro: Book) {
+
+        listaLibros.add(listaLibros.size, nuevolibro)
+        adapter.notifyItemInserted(listaLibros.size)
     }
 
 
     private fun SetupToolbar() {
-
         setSupportActionBar(ToolbarBooks)
     }
 
     private fun SetupRecyclerView() {
-
         RecyclerViewBooks = findViewById(R.id.recyclerviewbooks)
         RecyclerViewBooks.setHasFixedSize(true)
         RecyclerViewBooks.layoutManager = LinearLayoutManager(this)
-        val adapter = BooksAdapter(listaLibros)
+
         RecyclerViewBooks.adapter = adapter
-
-
     }
 
     private fun SetupButoon() {
         BotonAgregarLibro = findViewById(R.id.botonAgregarLibro)
 
         BotonAgregarLibro.setOnClickListener {
-            startActivity(Intent(this, AgregarLibroActivity::class.java))
-
-
+            val intent = Intent(this, AgregarLibroActivity::class.java)
+            startActivity(intent)
+            finish()
         }
-
     }
 }
