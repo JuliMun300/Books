@@ -64,7 +64,6 @@ class HomeActivity : AppCompatActivity() {
         RecyclerViewBooks = findViewById(R.id.recyclerviewbooks)
         RecyclerViewBooks.setHasFixedSize(true)
         RecyclerViewBooks.layoutManager = LinearLayoutManager(this)
-
         RecyclerViewBooks.adapter = adapter
     }
 
@@ -74,7 +73,12 @@ class HomeActivity : AppCompatActivity() {
         BotonAgregarLibro.setOnClickListener {
             val intent = Intent(this, AgregarLibroActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
 }
