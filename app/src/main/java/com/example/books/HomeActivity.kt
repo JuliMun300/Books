@@ -16,7 +16,12 @@ private lateinit var ToolbarBooks: Toolbar
 private lateinit var BotonAgregarLibro: FloatingActionButton
 private lateinit var RecyclerViewBooks: RecyclerView
 private var listaLibros = mutableListOf<Book>(
-    Book("Harry Potter", "1999", "Jk Rowling")
+    Book("Harry Potter", "1999", "Jk Rowling"),
+    Book("El señor de los anillos", "1954", "J. R. R. Tolkien"),
+    Book("El Aleph", "1949", "Jorge Luis Borges"),
+    Book("Madame Bovary", "1857", "Gustave Flaubert"),
+    Book("La guerra y la paz", "1869", " León Tolstoi")
+
 )
 val adapter = BooksAdapter(listaLibros)
 
