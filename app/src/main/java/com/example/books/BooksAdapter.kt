@@ -6,7 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BooksAdapter(val Libros: List<Book>) : RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
+class BooksAdapter(var Libros: List<Book>) : RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
+
+
+    fun setfilteredList(libros: List<Book>) {
+        this.Libros = libros
+        notifyDataSetChanged()
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BooksAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
