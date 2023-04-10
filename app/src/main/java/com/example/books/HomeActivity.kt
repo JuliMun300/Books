@@ -1,20 +1,21 @@
 package com.example.books
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Adapter
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.*
 
 
 private lateinit var ToolbarBooks: Toolbar
 private lateinit var BotonAgregarLibro: FloatingActionButton
 private lateinit var RecyclerViewBooks: RecyclerView
+private lateinit var SearchViewBuscar: SearchView
 private var listaLibros = mutableListOf<Book>(
     Book("Harry Potter", "1999", "Jk Rowling"),
     Book("El señor de los anillos", "1954", "J. R. R. Tolkien"),
@@ -25,13 +26,15 @@ private var listaLibros = mutableListOf<Book>(
 )
 val adapter = BooksAdapter(listaLibros)
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         //Instanciamos las variables
         ToolbarBooks = findViewById(R.id.Toolbar)
+        SearchViewBuscar = findViewById(R.id.searchViewbuscar)
+        SearchViewBuscar.setOnQueryTextListener(this)
 
         //Funcion Para Modificar el toolbar
         SetupToolbar()
@@ -50,6 +53,7 @@ class HomeActivity : AppCompatActivity() {
         val nuevolibro = intent.getParcelableExtra<Book>("NUEVOLIBRO")
 
         if (nuevolibro != null) {
+            //funcion para agregar el nuevo libro en la lista
             AgregarNuevoLibro(nuevolibro)
         }
     }
@@ -57,7 +61,7 @@ class HomeActivity : AppCompatActivity() {
     private fun AgregarNuevoLibro(nuevolibro: Book) {
 
         listaLibros.add(listaLibros.size, nuevolibro)
-        adapter.notifyItemInserted(listaLibros.size)
+        adapter.notifyDataSetChanged()
     }
 
 
@@ -78,6 +82,7 @@ class HomeActivity : AppCompatActivity() {
         BotonAgregarLibro.setOnClickListener {
             val intent = Intent(this, AgregarLibroActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -86,4 +91,31 @@ class HomeActivity : AppCompatActivity() {
         finish()
     }
 
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        ListaFiltrada(query)
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        ListaFiltrada(newText)
+        return true
+    }
+
+    //Funcion para cuando se busca un item aparezca en la lista
+    private fun ListaFiltrada(query: String?) {
+        if (query != null) {
+            val filteredList = mutableListOf<Book>()
+            for (i in listaLibros) {
+                if (i.Titulo.lowercase(Locale.ROOT).contains(query.toString().lowercase())) {
+                    filteredList.add(i)
+                }
+            }
+            if (filteredList.isEmpty()) {
+                Toast.makeText(this, "No hay datos", Toast.LENGTH_SHORT).show()
+            } else {
+                adapter.setfilteredList(filteredList)
+            }
+        }
+    }
 }
+
