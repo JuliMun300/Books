@@ -99,4 +99,16 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
         app:layout_constraintVertical_bias="0.512" />
 
+    <Button
+        android:id="@+id/botonCrearUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Crear usuario"
+        android:backgroundTint="@color/Celeste"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonIngresar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
