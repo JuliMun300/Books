@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
+    //Funcion para configurar de forma remota las variables desde Firebase
     private fun RemoteConfig() {
 
         val configSettings = remoteConfigSettings {
@@ -133,7 +134,6 @@ class MainActivity : AppCompatActivity() {
                 "Change_Title_Login" to "Books"
             )
         )
-        BotonCrearUsuario.visibility = View.GONE
 
         Firebase.remoteConfig.fetchAndActivate().addOnCompleteListener {
             if (it.isSuccessful) {
