@@ -10,4 +10,6 @@
     <color name="Gris">#C9999F9F</color>
     <color name="Azul">#C92751EC</color>
     <color name="Celeste">#B921A9F3</color>
+    <color name="Login">#B91482BD</color>
+    <color name="textFields">#B919ADF1</color>
 </resources>

@@ -39,7 +39,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/EmailTextView"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress" />
@@ -81,6 +81,7 @@
         android:layout_marginTop="95dp"
         android:layout_marginEnd="16dp"
         android:text="Ingresar"
+        android:textColor="@color/white"
         android:backgroundTint="@color/Azul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,6 +107,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="Crear usuario"
+        android:textColor="@color/white"
         android:backgroundTint="@color/Celeste"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
