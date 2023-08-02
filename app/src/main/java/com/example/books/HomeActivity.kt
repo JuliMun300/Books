@@ -1,14 +1,18 @@
 package com.example.books
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 
 
@@ -43,7 +47,7 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         SetupRecyclerView()
 
         //Funcion para Modificar el boton de agregar libro
-        SetupButoon()
+        Setupbutton()
 
         //Funcion para Notificar que se Agrego un nuevo Libro
         SetupNewBooks()
@@ -62,6 +66,7 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         listaLibros.add(listaLibros.size, nuevolibro)
         adapter.notifyDataSetChanged()
+        Snackbar.make(constraintlayouthome,"Libro agregado con exito",Snackbar.LENGTH_SHORT).show()
     }
 
 
@@ -76,7 +81,7 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         RecyclerViewBooks.adapter = adapter
     }
 
-    private fun SetupButoon() {
+    private fun Setupbutton() {
         BotonAgregarLibro = findViewById(R.id.botonAgregarLibro)
 
         BotonAgregarLibro.setOnClickListener {
