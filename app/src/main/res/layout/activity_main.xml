@@ -65,7 +65,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ContraseñaTextField"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
