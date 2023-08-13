@@ -58,7 +58,7 @@
         app:hintTextColor="@color/white"
         android:hint="Contraseña"
         app:endIconMode="password_toggle"
-        app:endIconTint="@color/black"
+        app:endIconTint="@color/Azul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">

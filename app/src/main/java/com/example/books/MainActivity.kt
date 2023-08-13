@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity() {
 
         //Agregamos el boton cuando se presione para ejecutar el registro del usuario
         BotonCrearUsuario.setOnClickListener {
-            RegistroCampos()
+            val intent = Intent(this, RegistrerActivity::class.java)
+            startActivity(intent)
         }
         RemoteConfig()
     }
@@ -68,23 +69,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //Funcion para registrar el usuario
-    private fun RegistroCampos() {
-        if (TextoEmail.text.toString().isEmpty() || TextoContraseña.text.toString().isEmpty()) {
-            Toast.makeText(this, "Por favor ingrese los campos", Toast.LENGTH_SHORT).show()
-        } else {
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-                TextoEmail.text.toString(),
-                TextoContraseña.text.toString()
-            ).addOnCompleteListener { task ->
-                if (task.isComplete) {
-                    Toast.makeText(this, "Usuario Creado", Toast.LENGTH_SHORT).show()
-                } else {
-                    ShowAlert("A ocurrido un error durante el Registro, intentelo nuevamente")
-                }
-            }
-        }
-    }
 
     //Funcion para guardar datos cada vez que se el usuario presione Recordad Usuario
     fun GuardarDatos(nombre: String, Pass: String) {
