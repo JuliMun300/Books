@@ -22,8 +22,6 @@ class AgregarLibroActivity : AppCompatActivity() {
         BotonAgregar.setOnClickListener {
             ValidarCampos()
         }
-
-
     }
 
     private fun ValidarCampos() {
@@ -45,7 +43,7 @@ class AgregarLibroActivity : AppCompatActivity() {
             val nuevolibro = Book(nombre, año, autor)
             val intent = Intent(this, HomeActivity::class.java)
             intent.putExtra("NUEVOLIBRO", nuevolibro)
-            startActivity(intent)
+            setResult(RESULT_OK,intent)
             finish()
         }
     }

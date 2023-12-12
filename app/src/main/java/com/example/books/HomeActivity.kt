@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
@@ -50,7 +51,7 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         Setupbutton()
 
         //Funcion para Notificar que se Agrego un nuevo Libro
-        SetupNewBooks()
+        //SetupNewBooks()
     }
 
     private fun SetupNewBooks() {
@@ -86,8 +87,7 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         BotonAgregarLibro.setOnClickListener {
             val intent = Intent(this, AgregarLibroActivity::class.java)
-            startActivity(intent)
-            finish()
+            BookLauncher.launch(intent)
         }
     }
 
@@ -119,6 +119,16 @@ class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 Toast.makeText(this, "No hay datos", Toast.LENGTH_SHORT).show()
             } else {
                 adapter.setfilteredList(filteredList)
+            }
+        }
+    }
+    private val BookLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+        if(result.resultCode == RESULT_OK){
+            val nuevolibro = result.data?.getParcelableExtra<Book>("NUEVOLIBRO")
+            if (nuevolibro != null) {
+                listaLibros.add(listaLibros.size, nuevolibro)
+                adapter.notifyItemInserted(listaLibros.size + 1)
+                Snackbar.make(constraintlayouthome,"Libro agregado con exito",Snackbar.LENGTH_SHORT).show()
             }
         }
     }
